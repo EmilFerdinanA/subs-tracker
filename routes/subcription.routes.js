@@ -1,6 +1,9 @@
 import { Router } from "express";
 import authorize from "../middlewares/auth.middleware.js";
-import { createSubcriptions } from "../controllers/subscription.controllers.js";
+import {
+  createSubcriptions,
+  getUserSubscription,
+} from "../controllers/subscription.controllers.js";
 
 const subcriptionRouter = Router();
 
@@ -8,9 +11,7 @@ subcriptionRouter.get("/", (req, res) =>
   res.status(200).json({ message: "Get all subcription" })
 );
 
-subcriptionRouter.get("/:id", (req, res) =>
-  res.status(200).json({ message: "Get subcription detail" })
-);
+subcriptionRouter.get("/:id", authorize, getUserSubscription);
 
 subcriptionRouter.post("/", authorize, createSubcriptions);
 
