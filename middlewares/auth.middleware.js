@@ -18,7 +18,6 @@ const authorize = async (req, res, next) => {
     }
 
     const decode = jwt.verify(token, JWT_SECRET);
-    console.log(decode, "decode");
 
     const user = await User.findById(decode.userId);
 
